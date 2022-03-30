@@ -16,7 +16,8 @@ for f in files:
         os.mkdir(dst+f[0])
     except:
         pass
-
+    try:
         print("src: "+src+f+" dst: "+dst+f[0]+"\\"+f)
         os.rename(src+f,dst+f[0]+"\\"+f)
-
+    except:
+        pass
