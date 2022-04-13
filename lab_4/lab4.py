@@ -37,25 +37,46 @@ def margeSort(arr):
             j += 1
             k += 1
 
-random_list = []
-n=int(input("Enter the number of elements: "))
-for i in range(0, n):
-    random_list.append(random.randint(0, n*2))
-print("The random list is: ", random_list)
 
-random_list1=random_list.copy()
-random_list2=random_list.copy()
+def speedTest(n):
+    random_list = []
+    for i in range(0, n):
+        random_list.append(random.randint(0, n * 2))
 
-print("insert sort starts")
-startInser=time.time()
-insertSort(random_list1)
-endInser=time.time()
-print("marge sort starts")
-startmerge=time.time()
-margeSort(random_list2)
-endmerge=time.time()
-print("insert sort time: ", endInser-startInser)
-print("marge sort time: ", endmerge-startmerge)
-print("insert sort: \t", random_list1)
-print("marge sort: \t", random_list2)
+    random_list1 = random_list.copy()
+    random_list2 = random_list.copy()
 
+    print("insert sort starts")
+    start_insert = time.time()
+    insertSort(random_list1)
+    end_insert = time.time()
+    print("insert sort time: ", end_insert - start_insert)
+    print("marge sort starts")
+    start_merge = time.time()
+    margeSort(random_list2)
+    end_merge = time.time()
+    print("marge sort time: ", end_merge - start_merge)
+    return [end_insert - start_insert, end_merge - start_merge]
+
+
+if __name__ == "__main__":
+    attempts = int(input("How many times do you want to test? \n"))
+    dataSample = int(input("How many data do you want to test? \n"))
+    maxTime = [0, 0]
+    minTime = [10000, 10000]
+    sum=[0,0]
+    for i in range(attempts):
+        data = speedTest(dataSample)
+        if data[0] < minTime[0]:
+            minTime[0] = data[0]
+        if data[1] < minTime[1]:
+            minTime[1] = data[1]
+        if data[0] > maxTime[0]:
+            maxTime[0] = data[0]
+        if data[1] > maxTime[1]:
+            maxTime[1] = data[1]
+        sum[0]+=data[0]
+        sum[1]+=data[1]
+        print(f"{i+1}.")
+        print(f"\tmin {minTime[0]}\tmax {maxTime[0]}\tavg {sum[0]/(i+1)}")
+        print(f"\tmin {minTime[1]}\tmax {maxTime[1]}\tavg {sum[1]/(i+1)}")
