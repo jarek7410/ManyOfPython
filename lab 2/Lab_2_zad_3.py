@@ -6,7 +6,7 @@ from mmap import mmap
 text=input()
 fileName="SJP.txt"
 
-if(text.strip().count(" ")>0):#zakładam że wyrazy podzielone sa tylko spacja
+if(text.strip().count(" ") != 0):#zakładam że wyrazy podzielone sa tylko spacja
     print("nie jest to jeden wyraz")
 else:
     text=text.lower()
